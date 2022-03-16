@@ -1874,7 +1874,12 @@ fn memory_info_allocator_name(memory_info: &OrtMemoryInfo) -> self::Result<&str>
 
 /// [`onnxruntime_c_api.h`](https://github.com/microsoft/onnxruntime/blob/v1.9.0/include/onnxruntime/core/session/onnxruntime_c_api.h#L749-L755)
 fn memory_info_allocator_type(memory_info: &OrtMemoryInfo) -> OrtAllocatorType {
+    // This is OrtAllocatorType::Invalid in case of everything else other than macos M1
+    #[cfg(all(target_os = "macos", target_arch = "aarch64"))]
     let mut allocator_type = OrtAllocatorType::OrtInvalidAllocator;
+    #[cfg(not(all(target_os = "macos", target_arch = "aarch64")))]
+    let mut allocator_type = OrtAllocatorType::Invalid;
+
     panic_on_error!(ORT_API.MemoryInfoGetType.unwrap()(memory_info, &mut allocator_type));
     allocator_type
 }

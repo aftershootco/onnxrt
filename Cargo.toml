@@ -13,6 +13,5 @@ edition = "2021"
 
 [dependencies]
 once_cell = "1.10.0"
-# onnxrt-sys = { git = "https://github.com/furiosa-ai/onnxrt-sys", tag = "0.7.0" }
-onnxrt-sys = { git = "https://github.com/aftershootco/onnxrt", tag = "0.8.0" }
-
+onnxrt-sys = { git = "https://github.com/aftershootco/onnxrt-sys", tag = "0.8.0" }
+# onnxrt-sys = { path = "../onnxrt-sys" }
