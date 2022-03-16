@@ -1874,7 +1874,7 @@ fn memory_info_allocator_name(memory_info: &OrtMemoryInfo) -> self::Result<&str>
 
 /// [`onnxruntime_c_api.h`](https://github.com/microsoft/onnxruntime/blob/v1.9.0/include/onnxruntime/core/session/onnxruntime_c_api.h#L749-L755)
 fn memory_info_allocator_type(memory_info: &OrtMemoryInfo) -> OrtAllocatorType {
-    let mut allocator_type = OrtAllocatorType::Invalid;
+    let mut allocator_type = OrtAllocatorType::OrtInvalidAllocator;
     panic_on_error!(ORT_API.MemoryInfoGetType.unwrap()(memory_info, &mut allocator_type));
     allocator_type
 }
